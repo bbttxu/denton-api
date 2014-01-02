@@ -12,4 +12,9 @@ group :development do
   gem 'guard'
   gem 'guard-bundler'
   gem 'guard-rails'
+  gem 'guard-rspec', require: false
+end
+
+group :development, :test do
+  gem 'rspec-rails'
 end
