@@ -9,8 +9,17 @@ describe "Shows API" do
     expect(response).to be_success            # test for the 200 status-code
     json = JSON.parse(response.body)
 
-    puts json
+    json['shows'].count().should equal(10) # check to make sure the right amount of messages are returned
+  end
 
-    json['shows'].count().should be_eq(10) # check to make sure the right amount of messages are returned
+  it 'should take and use a callback parameter' do
+    FactoryGirl.create_list( :show, 10 )
+
+    get '/shows', callback: 'callback'
+
+    expect(response).to be_success            # test for the 200 status-code
+
+    response.body.index('callback').should eq(0)
+    # json['shows'].count().should equal(10) # check to make sure the right amount of messages are returned
   end
 end

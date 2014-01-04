@@ -8,6 +8,9 @@ gem 'rails-api'
 gem 'mongoid', github: 'mongoid/mongoid'
 gem 'bson_ext'
 
+gem 'active_model_serializers'
+
+
 group :development do
   gem 'guard'
   gem 'guard-bundler'

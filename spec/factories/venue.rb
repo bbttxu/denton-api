@@ -1,7 +1,19 @@
 FactoryGirl.define do
+  sequence :name do |n|
+    "Venue #{n}"
+  end
+
+  sequence :phone do |y|
+    "555#{y}940214"
+  end
+
+  sequence :address do |n|
+    "#{n} main st"
+  end
+
   factory :venue do
-    name "hello band"
-    phone "123 456-7890"
-    address "123 main st"
+    name
+    sequence :phone do |n| "phone #{n}" end
+    address
   end
 end

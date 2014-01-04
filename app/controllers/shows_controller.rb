@@ -4,7 +4,7 @@ class ShowsController < ApplicationController
   def index
     @shows = Show.all
 
-    render json: @shows
+    render json: @shows, callback: params[:callback]
   end
 
   # GET /shows/1

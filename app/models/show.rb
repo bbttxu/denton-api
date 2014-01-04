@@ -7,7 +7,7 @@ class Show
   field :source, :type => String
   field :doors_at, :type => Time
   field :starts_at, :type => Time
-  field :time_is_unknown, :type => Boolean
+  field :time_is_uncertain, :type => Boolean
 
   belongs_to :venue
   has_many :gigs, dependent: :delete
@@ -18,5 +18,5 @@ class Show
   scope :upcoming, lambda { where( :starts_at.gte => Time.zone.now ) }
   scope :ordered, order_by( :starts_at => :asc )
 
-  validates_presence_of :price, :source, :starts_at, :time_is_unknown
+  validates_presence_of :price, :source, :starts_at, :time_is_uncertain
 end
