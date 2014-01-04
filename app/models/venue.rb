@@ -8,6 +8,7 @@ class Venue
   field :address, :type => String
 
   validates_presence_of :name, :phone, :address
+  validates_uniqueness_of :name, :phone, :address
 
   has_many :shows
 end
