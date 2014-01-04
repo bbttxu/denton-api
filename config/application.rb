@@ -11,6 +11,7 @@ require "rails/test_unit/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
+
 module DentonApi2
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -27,5 +28,12 @@ module DentonApi2
 
     # Disable the asset pipeline.
     config.assets.enabled = false
+
+    # Configure generators values.
+    config.generators do |g|
+      g.test_framework  :rspec, :fixture => true
+      g.fixture_replacement :factory_girl, :dir=>"spec/factories"
+    end
+
   end
 end

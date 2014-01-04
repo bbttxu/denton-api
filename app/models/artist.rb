@@ -4,6 +4,7 @@ class Artist
   include Mongoid::Timestamps
 
   field :name, :type => String
+  validates :name, presence: true, uniqueness: true
 
   has_many :gigs, dependent: :delete
   # many :shows, :through => :gigs

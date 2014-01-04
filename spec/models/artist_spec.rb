@@ -1,5 +1,15 @@
 require 'spec_helper'
 
 describe Artist do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "should be valid" do
+    artist = FactoryGirl.create 'artist'
+    artist.should be_valid
+  end
+
+  it "should have a name" do
+    artist = FactoryGirl.build 'artist', name: ''
+    artist.should_not be_valid
+  end
 end
+
+
