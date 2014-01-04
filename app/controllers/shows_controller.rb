@@ -1,8 +1,14 @@
 class ShowsController < ApplicationController
-  # GET /shows
-  # GET /shows.json
+
+  skip_before_filter :authenticate_user!, only: [ :index, :show, :day, :today ]
+  before_filter :do_caching
+
+  def do_caching
+    expires_in 5.minutes, :public => true
+  end
+
   def index
-    @shows = Show.all
+    @shows = Show.upcoming.ordered
 
     render json: @shows, callback: params[:callback]
   end
@@ -10,41 +16,13 @@ class ShowsController < ApplicationController
   # GET /shows/1
   # GET /shows/1.json
   def show
-    @show = Show.find(params[:id])
+    now = Time.zone.parse( "#{params[:date]} 2:00am" )
+    tomorrow = now + 24 * 60 * 60
+    @shows = Show.after(now).before(tomorrow).ordered
 
-    render json: @show
-  end
-
-  # POST /shows
-  # POST /shows.json
-  def create
-    @show = Show.new(params[:show])
-
-    if @show.save
-      render json: @show, status: :created, location: @show
-    else
-      render json: @show.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /shows/1
-  # PATCH/PUT /shows/1.json
-  def update
-    @show = Show.find(params[:id])
-
-    if @show.update(params[:show])
-      head :no_content
-    else
-      render json: @show.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /shows/1
-  # DELETE /shows/1.json
-  def destroy
-    @show = Show.find(params[:id])
-    @show.destroy
-
-    head :no_content
+    render json: @shows, callback: params[:callback]
+    # respond_to do |format|
+    #   format.json { render json: @shows, callback: params[:callback] }
+    # end
   end
 end

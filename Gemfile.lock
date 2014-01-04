@@ -1,4 +1,14 @@
 GIT
+  remote: git://github.com/bbttxu/cachebar.git
+  revision: 20b57b7075f68504f9356ba70ea5d6af382702ae
+  specs:
+    cachebar (1.1.0)
+      activesupport
+      httparty (~> 0.8.3)
+      redis
+      redis-namespace
+
+GIT
   remote: git://github.com/mongoid/mongoid.git
   revision: 221abac035d44d9ee4d629c5a316b168a9be0540
   specs:
@@ -44,6 +54,10 @@ GEM
     builder (3.1.4)
     celluloid (0.15.2)
       timers (~> 1.1.0)
+    chronic (0.10.2)
+    clockwork (0.6.2)
+      activesupport
+      tzinfo (~> 0.3.35)
     coderay (1.1.0)
     connection_pool (1.2.0)
     database_cleaner (1.2.0)
@@ -71,6 +85,9 @@ GEM
       guard (>= 2.1.1)
       rspec (>= 2.14, < 4.0)
     hike (1.2.3)
+    httparty (0.8.3)
+      multi_json (~> 1.0)
+      multi_xml
     i18n (0.6.9)
     listen (2.4.0)
       celluloid (>= 0.15.2)
@@ -82,12 +99,17 @@ GEM
       treetop (~> 1.4.8)
     method_source (0.8.2)
     mime-types (1.25.1)
+    mini_portile (0.5.2)
     minitest (4.7.5)
+    mono_logger (1.1.0)
     moped (2.0.0.beta4)
       bson (~> 2.0)
       connection_pool (~> 1.2)
       optionable (~> 0.2.0)
     multi_json (1.8.2)
+    multi_xml (0.5.5)
+    nokogiri (1.6.1)
+      mini_portile (~> 0.5.0)
     optionable (0.2.0)
     origin (2.0.0)
     polyglot (0.3.3)
@@ -96,6 +118,8 @@ GEM
       method_source (~> 0.8)
       slop (~> 3.4)
     rack (1.5.2)
+    rack-protection (1.5.0)
+      rack
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.0.2)
@@ -119,6 +143,17 @@ GEM
     rb-fsevent (0.9.4)
     rb-inotify (0.9.3)
       ffi (>= 0.5.0)
+    redis (3.0.5)
+    redis-namespace (1.3.1)
+      redis (~> 3.0.0)
+    resque (1.24.1)
+      mono_logger (~> 1.0)
+      multi_json (~> 1.0)
+      redis-namespace (~> 1.2)
+      sinatra (>= 0.9.2)
+      vegas (~> 0.1.2)
+    resque-loner (1.2.1)
+      resque (~> 1.0)
     rspec (2.14.1)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
@@ -134,6 +169,10 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    sinatra (1.4.3)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
     slop (3.4.7)
     sprockets (2.10.1)
       hike (~> 1.2)
@@ -153,6 +192,8 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     tzinfo (0.3.38)
+    vegas (0.1.11)
+      rack (>= 1.0.0)
 
 PLATFORMS
   ruby
@@ -160,13 +201,20 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   bson_ext
+  cachebar!
+  chronic
+  clockwork
   database_cleaner
   factory_girl_rails
   guard
   guard-bundler
   guard-rails
   guard-rspec
+  httparty
   mongoid!
+  nokogiri
   rails (= 4.0.2)
   rails-api
+  resque
+  resque-loner
   rspec-rails

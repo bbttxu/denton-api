@@ -5,11 +5,30 @@ gem 'rails', '4.0.2'
 
 gem 'rails-api'
 
+
+
+# database
 gem 'mongoid', github: 'mongoid/mongoid'
 gem 'bson_ext'
 
+# data format
 gem 'active_model_serializers'
 
+
+# background queues
+gem 'resque'
+gem 'resque-loner'
+
+# repeating tasks
+gem 'clockwork'
+
+# workers
+gem 'nokogiri'
+gem 'chronic'
+
+# scraping
+gem 'httparty'
+gem "cachebar", github: "bbttxu/cachebar"
 
 group :development do
   gem 'guard'
