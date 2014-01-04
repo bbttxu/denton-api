@@ -7,14 +7,6 @@ describe Gig do
     gig.should be_valid
   end
 
-  # it "should have a name" do
-  #   gig = FactoryGirl.build 'gig', name: ''
-  #   gig.should_not be_valid
-  # end
-
-  # it "should have a unique name" do
-  #   gig = FactoryGirl.create 'gig', name: 'Bad Leaf'
-  #   copycat = FactoryGirl.build 'gig', name: 'Bad Leaf'
-  #   copycat.should_not be_valid
-  # end
+  it "should have a show"
+  it "should have an artist"
 end

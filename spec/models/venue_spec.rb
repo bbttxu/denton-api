@@ -16,4 +16,7 @@ describe Venue do
     copycat = FactoryGirl.build 'venue', name: 'Bad Leaf'
     copycat.should_not be_valid
   end
+
+  it "should have a phone number"
+  it "should have an address"
 end
