@@ -25,14 +25,15 @@ namespace :deploy do
     run "#{ sudo } ln -s #{ deploy_to }/shared/config/database.yml #{ current_path }/config/database.yml"
   end
 
+  # AWK: No Assets in this project
   # NOTE: I don't use this anymore, but this is how I used to do it.
-  desc "Precompile assets after deploy"
-  task :precompile_assets do
-    run <<-CMD
-      cd #{ current_path } &&
-      #{ sudo } bundle exec rake assets:precompile RAILS_ENV=#{ rails_env }
-    CMD
-  end
+  # desc "Precompile assets after deploy"
+  # task :precompile_assets do
+  #   run <<-CMD
+  #     cd #{ current_path } &&
+  #     #{ sudo } bundle exec rake assets:precompile RAILS_ENV=#{ rails_env }
+  #   CMD
+  # end
 
   desc "Restart applicaiton"
   task :restart do
