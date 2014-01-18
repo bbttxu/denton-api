@@ -73,9 +73,9 @@ test:
 production:
   sessions:
     default:
-      database: denton_api_production
+      database: denton_api
       hosts:
-        - localhost:27017
+        - localhost:27117
       options:
         read: primary
         # In the test environment we lower the retries and retry interval to
