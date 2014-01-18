@@ -14,7 +14,7 @@ set :deploy_via, :copy
 set :ssh_options, { :forward_agent => true, :port => 22 }
 set :keep_releases, 5
 default_run_options[:pty] = true
-server "192.241.245.86", :app, :web, :db, :primary => true
+server "mongo0.blackbeartheory.com", :app, :web, :db, :primary => true
 
 namespace :deploy do
   task :start do ; end

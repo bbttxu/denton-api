@@ -5,7 +5,7 @@ gem 'rails', '4.0.2'
 
 gem 'rails-api'
 
-
+gem 'thin'
 
 # database
 gem 'mongoid', github: 'mongoid/mongoid'
