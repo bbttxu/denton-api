@@ -35,5 +35,6 @@ module DentonApi2
       g.fixture_replacement :factory_girl, :dir=>"spec/factories"
     end
 
+    config.secret_key_base = 'blipblapblup'
   end
 end

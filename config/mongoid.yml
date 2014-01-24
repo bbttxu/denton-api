@@ -57,7 +57,7 @@ development:
     # use_activesupport_time_zone: true
 
     # Ensure all times are UTC in the app side. (default: false)
-    # use_utc: false
+    use_utc: true
 test:
   sessions:
     default:
@@ -78,9 +78,5 @@ production:
         - localhost:27017
       options:
         read: primary
-        # In the test environment we lower the retries and retry interval to
-        # low amounts for fast failures.
-        # max_retries: 1
-        # retry_interval: 0
         pool_size: 35
 
