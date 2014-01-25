@@ -14,7 +14,7 @@ set :deploy_via, :copy
 set :ssh_options, { :forward_agent => true, :port => 22 }
 set :keep_releases, 5
 default_run_options[:pty] = true
-server "162.243.220.214", :app, :web, :db, :primary => true
+server "192.241.240.84", :app, :web, :db, :primary => true
 
 namespace :deploy do
   task :start do ; end

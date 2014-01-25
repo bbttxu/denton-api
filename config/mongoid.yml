@@ -77,6 +77,6 @@ production:
       hosts:
         - localhost:27017
       options:
-        read: primary
-        pool_size: 35
+        # read: primary
+        # pool_size: 35
 
