@@ -15,7 +15,7 @@ class Show
 
   scope :after, lambda { |date| where(:starts_at.gte => date.localtime ) }
   scope :before, lambda { |date| where(:starts_at.lte => date.localtime ) }
-  scope :upcoming, lambda { where( :starts_at.gte => Time.zone.now ) }
+  scope :upcoming, lambda { where( :starts_at.gte => ( Time.zone.now - 6 * 60 * 60 ) ) }
   scope :ordered, order_by( :starts_at => :asc )
 
   validates_presence_of :price, :source, :starts_at, :time_is_uncertain
