@@ -10,6 +10,7 @@ gem 'thin'
 # database
 gem 'mongoid', github: 'mongoid/mongoid'
 gem 'bson_ext'
+gem "geocoder"
 
 # data format
 gem 'active_model_serializers'

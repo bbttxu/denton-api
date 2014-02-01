@@ -17,6 +17,19 @@ describe Venue do
     copycat.should_not be_valid
   end
 
-  it "should have a phone number"
-  it "should have an address"
+  it "should have a phone number" do
+    venue = FactoryGirl.build 'venue', phone: ""
+    venue.should_not be_valid
+  end
+
+  it "should have an address" do
+    venue = FactoryGirl.build 'venue', address: ""
+    venue.should_not be_valid
+  end
+
+  it "should have a location" do
+    venue = FactoryGirl.build 'venue', address: "Denton, TX"
+    venue.save
+    venue.coordinates.should be_present
+  end
 end
