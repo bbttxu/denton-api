@@ -5,6 +5,7 @@ gem 'rails', '4.0.2'
 
 gem 'rails-api'
 
+# server
 gem 'thin'
 
 # database
@@ -14,7 +15,6 @@ gem "geocoder"
 
 # data format
 gem 'active_model_serializers'
-
 
 # background queues
 gem 'resque'
@@ -37,6 +37,7 @@ group :development do
   gem 'guard-rails'
   gem 'guard-rspec', require: false
   gem 'capistrano', '~> 2'
+  gem 'guard-cane'
 end
 
 group :development, :test do
