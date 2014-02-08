@@ -30,14 +30,14 @@ class Haileys < Scraper
       bands = show.css('div.band')
       show_title = show.css('div.show-title')
 
-      puts bands.text
-      puts show_title.text
+      # puts bands.text
+      # puts show_title.text
 
       if (bands.text() == "")
         bands = show_title
       end
 
-      puts bands.text
+      # puts bands.text
 
       time = show.at_css('ul.event-info li:first')
       event_info = show.css('ul.event-info li')
