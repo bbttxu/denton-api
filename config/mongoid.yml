@@ -75,8 +75,8 @@ production:
     default:
       database: denton_api
       hosts:
-        - localhost:27017
+        - denton:27017
       options:
-        # read: primary
-        # pool_size: 35
+  options:
+    use_utc: true
 
