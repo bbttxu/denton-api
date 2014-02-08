@@ -28,6 +28,16 @@ class Haileys < Scraper
 
     doc.css("div.show").each do |show|
       bands = show.css('div.band')
+      show_title = show.css('div.show-title')
+
+      puts bands.text
+      puts show_title.text
+
+      if (bands.text() == "")
+        bands = show_title
+      end
+
+      puts bands.text
 
       time = show.at_css('ul.event-info li:first')
       event_info = show.css('ul.event-info li')
@@ -64,6 +74,9 @@ class Haileys < Scraper
       position = 0
       bands.each do | band |
         band_name = Nokogiri::HTML( band.to_s ).text
+
+        puts band_name
+
         cleansed_band_name = band_name.downcase
 
         position += 1
@@ -81,6 +94,8 @@ class Haileys < Scraper
         show.gigs << gig
       end
       show.save
+
+      puts show
     end
 
 

@@ -13,7 +13,7 @@ class Venue
   validates_uniqueness_of :name, :phone, :address
 
   has_many :shows
-  
+
   after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
   geocoded_by :address
 end
