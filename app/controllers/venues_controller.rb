@@ -2,7 +2,14 @@ class VenuesController < ApplicationController
   # GET /venues
   # GET /venues.json
   def index
-    @venues = Venue.all
+
+    latitude = params[:latitude] ||= "33.21499"
+    longitude = params[:longitude] ||= "-97.132672"
+    radius = params[:radius] ||= "20"
+    units = params[:units] ||= "km"
+
+
+    @venues = Venue.near( [latitude,longitude], radius )
 
     render json: @venues
   end

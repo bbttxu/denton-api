@@ -1,16 +1,20 @@
 # A sample Guardfile
 # More info at https://github.com/guard/guard#readme
 
+guard :bundler do
+  watch('Gemfile')
+  # Uncomment next line if your Gemfile contains the `gemspec' command.
+  # watch(/^.+\.gemspec/)
+end
+
+
 guard 'rails' do
   watch('Gemfile.lock')
   watch(%r{^(config|lib)/.*})
 end
 
-
-guard :bundler do
-  watch('Gemfile')
-  # Uncomment next line if your Gemfile contains the `gemspec' command.
-  # watch(/^.+\.gemspec/)
+guard :cane do
+  watch(%r{^(.+)\.rb$})
 end
 
 guard :rspec, cmd: 'bundle exec rspec', all_on_start: true, all_after_pass: true do
@@ -33,3 +37,4 @@ guard :rspec, cmd: 'bundle exec rspec', all_on_start: true, all_after_pass: true
   watch(%r{^spec/acceptance/(.+)\.feature$})
   watch(%r{^spec/acceptance/steps/(.+)_steps\.rb$})   { |m| Dir[File.join("**/#{m[1]}.feature")][0] || 'spec/acceptance' }
 end
+

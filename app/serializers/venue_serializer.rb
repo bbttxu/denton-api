@@ -1,4 +1,4 @@
 # venue_serializer.rb
 class VenueSerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :coordinates
 end
