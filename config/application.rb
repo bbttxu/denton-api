@@ -36,5 +36,8 @@ module DentonApi2
     end
 
     config.secret_key_base = 'blipblapblup'
+    
+    config.i18n.enforce_available_locales = true
+
   end
 end
