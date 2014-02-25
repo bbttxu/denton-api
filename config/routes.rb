@@ -3,7 +3,6 @@ DentonApi2::Application.routes.draw do
   resources :artists, except: [:new, :edit]
   resources :venues, except: [:new, :edit]
   resources :shows, except: [:new, :edit]
-  resources :projects, except: [:new, :edit]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -19,4 +19,14 @@ class Show
   scope :ordered, order_by( :starts_at => :asc )
 
   validates_presence_of :price, :source, :starts_at, :time_is_uncertain
+
+  def self.by_day()
+    daily_events = {}
+    self.upcoming.each do |event|
+      date_str = event.starts_at.to_date.to_s
+      daily_events[date_str] ||= 0
+      daily_events[date_str] += 1
+    end
+    return daily_events
+  end
 end
