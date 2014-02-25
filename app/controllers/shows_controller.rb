@@ -14,8 +14,8 @@ class ShowsController < ApplicationController
   end
 
   # GET /shows/yyyy-mm-dd.json
-  def show
-    now = Time.zone.parse( "#{params[:id]} 2:00am" )
+  def day
+    now = Time.zone.parse( "#{params[:date]} 2:00am" )
     tomorrow = now + 24 * 60 * 60
     @shows = Show.after(now).before(tomorrow).ordered
 
