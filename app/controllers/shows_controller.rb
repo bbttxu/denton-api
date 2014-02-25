@@ -1,6 +1,6 @@
 class ShowsController < ApplicationController
 
-  skip_before_filter :authenticate_user!, only: [ :index, :show, :day, :today ]
+  skip_before_filter :authenticate_user!, only: [ :index, :show ]
   before_filter :do_caching
 
   def do_caching

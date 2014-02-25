@@ -15,6 +15,6 @@ class Artist
 
   # accepts_nested_attributes_for :gigs
 
-  scope :alphabetical, order_by(:name => :desc)
+  scope :alphabetical, order_by(name: 'desc')
   # scope :recent, order_by(:created_at => :desc).limit(100)
 end

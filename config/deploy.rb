@@ -2,7 +2,7 @@
 require 'bundler/capistrano'
 
 set :application, "Denton API"
-set :repository,  "adam@git.blackbeartheory.com:~/repos/denton-api.git"
+set :repository,  "https://github.com/bbttxu/denton-api.git"
 set :deploy_to, "/var/www/denton-api.bbttxu.com"
 set :scm, :git
 set :branch, "master"
