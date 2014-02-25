@@ -1,3 +1,9 @@
+module BSON
+  class ObjectId
+    alias :to_json :to_s
+    alias :as_json :to_s
+  end
+end
 
 class ShowSerializer < ActiveModel::Serializer
   attributes :id, :starts_at, :source, :time_is_uncertain, :price
