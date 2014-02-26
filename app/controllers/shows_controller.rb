@@ -9,7 +9,7 @@ class ShowsController < ApplicationController
 
   # GET /shows.json
   def index
-    @shows = Show.upcoming
+    @shows = Show.upcoming.ordered
     render json: @shows, callback: params[:callback]
   end
 
