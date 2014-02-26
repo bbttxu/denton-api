@@ -1,6 +1,6 @@
 class ShowsController < ApplicationController
 
-  skip_before_filter :authenticate_user!, only: [ :index, :show ]
+  skip_before_filter :authenticate_user!, only: [ :index, :show, :calendar, :day]
   before_filter :do_caching
 
   def do_caching
@@ -9,6 +9,14 @@ class ShowsController < ApplicationController
 
   # GET /shows.json
   def index
+    @shows = Show.upcoming
+    render json: @shows, callback: params[:callback]
+  end
+
+
+
+  # GET /shows/calendar.json
+  def calendar
     @shows = Show.by_day
     render json: @shows.to_json, callback: params[:callback]
   end

@@ -9,9 +9,9 @@ class Artist
   has_many :gigs, dependent: :delete
   # many :shows, :through => :gigs
 
-  def as_json(options = nil)
-    super((options || {}).merge(include: { gigs: { only: ["show_id"] } } ))
-  end
+  # def as_json(options = nil)
+  #   super((options || {}).merge(include: { gigs: { only: ["show_id"] } } ))
+  # end
 
   # accepts_nested_attributes_for :gigs
 

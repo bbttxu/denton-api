@@ -75,7 +75,7 @@ production:
     default:
       database: denton_api
       hosts:
-        - denton:27017
+        - denton1:27017
       options:
   options:
     use_utc: true
