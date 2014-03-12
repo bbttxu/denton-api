@@ -30,6 +30,7 @@ gem 'chronic'
 # scraping
 gem 'httparty'
 gem "cachebar", github: "bbttxu/cachebar"
+gem "icalendar"
 
 group :development do
   gem 'guard'
