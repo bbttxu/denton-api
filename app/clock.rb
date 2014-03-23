@@ -23,5 +23,6 @@ every( 15.minutes, 'update.venues') {
   Resque.enqueue(Andys)
   # Resque.enqueue(Rockinrodeo)
   Resque.enqueue(Abbey)
+  Resque.enqueue(Banter)
   # Resque.enqueue(UNTCalendar)
 }
