@@ -39,9 +39,9 @@ class Dans < Scraper
       show.source = 'http://danssilverleaf.com/#' + div.attr("id")
       show.time_is_uncertain = false
 
-      Chronic.time_class = Time.zone
+      # Chronic.time_class = Time.zone
       show.doors_at = Chronic.parse("#{date.to_s} #{show_info['Show']}".gsub(/\s+/, ' ') )
-      show.starts_at = Chronic.parse("#{date.to_s} #{show_info['Show']}".gsub(/\s+/, ' ') ).localtime
+      show.starts_at = Chronic.parse("#{date.to_s} #{show_info['Show']}".gsub(/\s+/, ' ') )
       show.venue_id = dans.id
       show.save
 
