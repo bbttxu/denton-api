@@ -5,9 +5,6 @@ require 'open-uri'
 require 'nokogiri'
 require 'chronic'
 
-
-class
-
 # worker to scrape data from the following venue
 class JazzFest < Scraper
   @queue = :jazzfest
@@ -18,7 +15,7 @@ class JazzFest < Scraper
 			{
 				name: "Jazz Stage", 
 				url: "jazzStage"
-			}
+			},
 			# {name: "Courtyard Stage"},
 			# {name: "Roving River Stage"},
 			# {name: "University of North Texas"},
@@ -36,11 +33,9 @@ class JazzFest < Scraper
 	    venue.phone = " "
 	    venue.address = " "
 	    venue.save
-	    puts venue.name
+      url = "http://www.dentonjazzfest.com/stages/#{stage[:url]}.shtml"
 
-	    puts "http://www.dentonjazzfest.com/stages/#{stage[:url]}.shtml"
-
-	    html = Nokogiri::HTML( open( "http://www.dentonjazzfest.com/stages/#{stage[:url]}.shtml" ) )
+	    html = Nokogiri::HTML( open( url ) )
 
 	    shows = Show.destroy_all :venue_id => venue.id
 
@@ -50,14 +45,32 @@ class JazzFest < Scraper
 	    
 	    	h6.next_element.css('.stageListing').each do |listing|
 	    		time = listing.css('.stageTime').text
-	    		artist = listing.text
 
+          full_date = Chronic.parse( [date, time].collect{|x| x.strip}.join(" ") )
+
+
+          show = Show.new
+          show.starts_at = full_date
+          show.doors_at = full_date
+          show.source = url
+          show.time_is_uncertain = false
+          show.venue_id = venue.id
+          show.price = "FREE!!!"
+          show.save
+
+	    		artist = listing.text
 	    		# artist comes back with time included, so we gsub it out
 	    		artist = artist.gsub(time, "")
 
+	    		artist = Artist.find_or_create_by name: artist.slugify
+          artist.save
 
-
-	    		puts Chronic.parse( [date, time].collect{|x| x.strip}.join(" ") )
+          gig = Gig.new
+          gig.artist_id = artist.id
+          gig.show_id = show.id
+          gig.position = 1
+          gig.save
+          
 
 	    	end
 
