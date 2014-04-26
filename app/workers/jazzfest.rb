@@ -18,7 +18,7 @@ class JazzFest < Scraper
 			{
 				name: "Jazz Stage", 
 				url: "jazzStage"
-			},
+			}
 			# {name: "Courtyard Stage"},
 			# {name: "Roving River Stage"},
 			# {name: "University of North Texas"},
