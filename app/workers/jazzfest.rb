@@ -68,8 +68,8 @@ class JazzFest < Scraper
 	    	h6.next_element.css('.stageListing').each do |listing|
 	    		time = listing.css('.stageTime').text
 
+          # Chronic.time_class = Time.zone
           full_date = Chronic.parse( [date, time].collect{|x| x.strip}.join(" ") )
-
 
           show = Show.new
           show.starts_at = full_date
