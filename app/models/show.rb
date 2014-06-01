@@ -24,7 +24,7 @@ class Show
   def self.by_day()
     daily_events = {}
     self.upcoming.soon.each do |event|
-      date_str = event.starts_at.to_date.to_s
+      date_str = event.starts_at.localtime.to_date.to_s
       daily_events[date_str] ||= 0
       daily_events[date_str] += 1
     end
