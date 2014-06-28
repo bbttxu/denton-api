@@ -51,3 +51,5 @@ group :test do
 end
 
 gem 'newrelic_rpm'
+
+gem 'coveralls', require: false
