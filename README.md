@@ -1,18 +1,18 @@
 [![Build Status](https://travis-ci.org/bbttxu/denton-api.svg?branch=master)](https://travis-ci.org/bbttxu/denton-api)
 
-== README
+# README
 
 This project is the API portion of http://bbttxu.com/denton after the front-end and back-end code were split.
 
-=== Requirements
+## Requirements
 
 - Ruby 2.0
 - mongodb
 
-=== Install
+### Install
 
 `bundle install`
 
-=== Testing and Dev
+### Testing and Dev
 
 `be guard`
