@@ -15,15 +15,15 @@ class Show
 
   scope :after, lambda { |date| where(:starts_at.gte => date.localtime ) }
   scope :before, lambda { |date| where(:starts_at.lte => date.localtime ) }
-  scope :upcoming, lambda { where( :starts_at.gte => ( Time.zone.now - 6 * 60 * 60 ) ) }
-  scope :soon, lambda { where( :starts_at.lte => ( Time.zone.now + 2 * 365 * 24 * 60 * 60 ) ) }
+  scope :upcoming, lambda { where( :starts_at.gte => ( Time.zone.now - 21600 ) ) }
+  scope :soon, lambda { where( :starts_at.lte => ( Time.zone.now + 63072000 ) ) }
   scope :ordered, order_by( :starts_at => :asc )
 
   validates_presence_of :price, :source, :starts_at, :time_is_uncertain
 
   def self.by_day()
     daily_events = {}
-    self.upcoming.soon.each do |event|
+    self.each do |event|
       date_str = event.starts_at.localtime.to_date.to_s
       daily_events[date_str] ||= 0
       daily_events[date_str] += 1
