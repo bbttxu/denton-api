@@ -1,6 +1,4 @@
-[![Build Status](https://travis-ci.org/bbttxu/denton-api.svg?branch=master)](https://travis-ci.org/bbttxu/denton-api)
-
-[![Coverage Status](https://coveralls.io/repos/bbttxu/denton-api/badge.png?branch=master)](https://coveralls.io/r/bbttxu/denton-api?branch=master)
+[![Build Status](https://travis-ci.org/bbttxu/denton-api.svg?branch=master)](https://travis-ci.org/bbttxu/denton-api) [![Coverage Status](https://coveralls.io/repos/bbttxu/denton-api/badge.png?branch=master)](https://coveralls.io/r/bbttxu/denton-api?branch=master)
 
 # Denton API
 
