@@ -3,7 +3,9 @@ rvm:
   - 2.0.0-p247
 
 before_script:
-  - sleep 15
+  - echo 'America/Chicago' | sudo tee /etc/timezone
+  - sudo dpkg-reconfigure --frontend noninteractive tzdata
+  - sudo ntpdate ntp.ubuntu.com
 
 services:
   - mongodb
