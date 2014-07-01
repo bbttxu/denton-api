@@ -53,3 +53,5 @@ end
 gem 'newrelic_rpm'
 
 gem 'coveralls', require: false
+
+gem 'turn', '0.8.2'
