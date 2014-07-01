@@ -47,6 +47,7 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
+    ansi (1.4.3)
     arel (4.0.2)
     bson (2.0.0)
     bson_ext (1.5.1)
@@ -234,6 +235,8 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
+    turn (0.8.2)
+      ansi (>= 1.2.2)
     tzinfo (0.3.39)
     vegas (0.1.11)
       rack (>= 1.0.0)
@@ -268,3 +271,4 @@ DEPENDENCIES
   resque-loner
   rspec-rails
   thin
+  turn (= 0.8.2)
