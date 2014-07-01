@@ -17,7 +17,7 @@ class ShowsController < ApplicationController
 
   # GET /shows/calendar.json
   def calendar
-    @shows = Show.by_day
+    @shows = Show.upcoming.soon.by_day
     render json: @shows.to_json, callback: params[:callback]
   end
 
