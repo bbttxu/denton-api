@@ -8,6 +8,11 @@ before_script:
   - sudo dpkg-reconfigure --frontend noninteractive tzdata
   - sudo ntpdate ntp.ubuntu.com
 
+install: bundle install --without development --deployment
+cache:
+  directories:
+  - vendor/bundle
+
 services:
-  - mongodb
-  - redis-server
+- mongodb
+- redis-server

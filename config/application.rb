@@ -12,7 +12,7 @@ require "rails/test_unit/railtie"
 Bundler.require(:default, Rails.env)
 
 
-module DentonApi2
+module DentonApi
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -36,7 +36,7 @@ module DentonApi2
     end
 
     config.secret_key_base = 'blipblapblup'
-    
+
     config.i18n.enforce_available_locales = true
 
   end
