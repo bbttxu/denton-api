@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require File.expand_path('../app/workers/scraper.rb',  __FILE__)
 
-DentonApi2::Application.load_tasks
+DentonApi::Application.load_tasks
