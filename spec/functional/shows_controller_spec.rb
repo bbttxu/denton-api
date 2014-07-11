@@ -8,12 +8,17 @@ describe ShowsController, :type => :controller do
       response.should be_success
     end
     it "should respond properly to a JSONP callback"
-  end
 
-  describe "JSON interaction" do
     it "should return calendar JSON" do
       request.accept = "application/json"
       get :calendar
+      response.should be_success
+    end
+    it "should respond properly to a JSONP callback"
+
+    it "should return shows JSON" do
+      request.accept = "application/json"
+      get "shows/2014-12-24"
       response.should be_success
     end
     it "should respond properly to a JSONP callback"
