@@ -1,21 +1,34 @@
 require 'spec_helper'
 
 describe ShowsController, :type => :controller do
-  describe "JSON interaction" do
-    it "should return on index JSON" do
+  describe "an index" do
+    it "should return JSON" do
       request.accept = "application/json"
       get :index
       response.should be_success
     end
+
     it "should respond properly to a JSONP callback"
   end
 
-  describe "JSON interaction" do
-    it "should return calendar JSON" do
+  describe "a calendar" do
+    it "should return JSON" do
       request.accept = "application/json"
       get :calendar
       response.should be_success
     end
+
+    it "should respond properly to a JSONP callback"
+
+  end
+
+  describe "a given day" do
+    it "should return that days JSON" do
+      request.accept = "application/json"
+      get :day, date: "2014-12-14"
+      response.should be_success
+    end
+
     it "should respond properly to a JSONP callback"
   end
 end
