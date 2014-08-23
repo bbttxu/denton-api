@@ -50,6 +50,13 @@ class Haileys < Scraper
     }
   end
 
+  def self.parseArtist(show)
+    artist = show.css('span.location')[0].text
+    {
+      artist: artist.split("&#8211")[0].strip!
+    }
+  end
+
   def self.perform()
     puts "updating Hailey's"
 
@@ -73,9 +80,13 @@ class Haileys < Scraper
       show = Show.new show
       show.venue = haileys
 
-      show.save
-      puts show.to_json
 
+      artist = parseArtist(showHTML)
+      artist = Artist.new artist
+      puts artist.to_json
+
+
+      show.save
     end
 
 
