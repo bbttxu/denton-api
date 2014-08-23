@@ -51,9 +51,10 @@ class Haileys < Scraper
   end
 
   def self.parseArtist(show)
-    artist = show.css('span.location')[0].text
+    artist = show.css('span.location')[0].inner_text
+    artist = artist.split("–")[0].strip!
     {
-      artist: artist.split("&#8211")[0].strip!
+      name: artist
     }
   end
 
@@ -67,8 +68,15 @@ class Haileys < Scraper
 
 
     html = Nokogiri::HTML( open( 'http://haileysclub.com/contact/' ) )
-    shows = Show.destroy_all :venue_id => haileys.id
+    # shows = Show.destroy_all :venue_id => haileys.id
 
+
+    current_shows_id = Show.where(:venue => haileys).collect{|x|puts x.id}
+    puts "current"
+    puts current_shows_id
+
+    new_show_ids = []
+    puts "new"
 
     shows().each do |showHTML|
       show = {}
@@ -76,19 +84,48 @@ class Haileys < Scraper
       show = show.merge parseStartsAt(showHTML)
       show = show.merge parsePrice(showHTML)
 
-
-      show = Show.new show
+      show = Show.find_or_initialize_by show
       show.venue = haileys
+      show.save
 
+      new_show_ids << show.id
+
+      # puts show.to_json
 
       artist = parseArtist(showHTML)
-      artist = Artist.new artist
-      puts artist.to_json
 
+      full_name = artist[:name].split(/\s/).collect{|x|x.capitalize}
+      full_name = full_name.join( " " )
+
+      artist = Artist.find_or_initialize_by name: full_name
+
+      # artist = Artist.new artist
+      artist.save
+
+      # puts artist.to_json
+
+      gig = Gig.find_or_initialize_by :position => 1, :artist_id => artist.id, :show_id => show.id
+
+      # gig.position = 1
+      # gig.artist = artist
+      # gig.show = show
+      gig.save
+
+      # puts gig
+
+      show.gigs << gig
 
       show.save
+
+      puts show.to_json
     end
 
+
+    puts "diff"
+    puts (current_shows_id - new_show_ids)
+    (current_shows_id - new_show_ids).each do |show_id|
+      Show.find(show_id).destroy
+    end
 
     # doc.css("div.show").each do |show|
     #   bands = show.css('div.band')
