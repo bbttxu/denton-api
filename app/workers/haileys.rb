@@ -68,7 +68,14 @@ class Haileys < Scraper
       show = show.merge parseSource(showHTML)
       show = show.merge parseStartsAt(showHTML)
       show = show.merge parsePrice(showHTML)
-      puts show
+
+
+      show = Show.new show
+      show.venue = haileys
+
+      show.save
+      puts show.to_json
+
     end
 
 
