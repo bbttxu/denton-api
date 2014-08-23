@@ -66,9 +66,6 @@ class Haileys < Scraper
     haileys.address = "122 Mulberry Street, Denton, TX"
     haileys.save
 
-
-    # html = Nokogiri::HTML( open( 'http://haileysclub.com/contact/' ) )
-
     current_shows_id = Show.where(:venue => haileys).collect{|x|puts x.id}
 
     new_show_ids = []
@@ -109,79 +106,5 @@ class Haileys < Scraper
     (current_shows_id - new_show_ids).each do |show_id|
       Show.find(show_id).destroy
     end
-
-    # doc.css("div.show").each do |show|
-    #   bands = show.css('div.band')
-    #   show_title = show.css('div.show-title')
-
-    #   # puts bands.text
-    #   # puts show_title.text
-
-    #   if (bands.text() == "")
-    #     bands = show_title
-    #   end
-
-    #   # puts bands.text
-
-    #   time = show.at_css('ul.event-info li:first')
-    #   event_info = show.css('ul.event-info li')
-    #   price = Nokogiri::HTML( event_info[1].to_s ).text
-
-    #   unless time.nil?
-    #     time = time ? time.text : 'Doors at 1:23PM,'
-    #     time.gsub!('Doors at','').gsub!(',','')
-    #   end
-
-    #   date = show.at_css('span.date-display-single')
-    #   date = date ? date.text.split('-')[1] : '12.12'
-    #   date.gsub!('.','/')
-    #   parts = date.split('/')
-    #   month = parts[0]
-    #   month = Date::MONTHNAMES[month.to_i]
-    #   date_of_month = parts[1]
-    #   date = month + " " + date_of_month
-    #   time = show.css('ul.event-info li:first').text.gsub("Doors at", "")
-    #   doors_at = time
-
-    #   # Chronic.time_class = Time.zone
-    #   doors_at = Chronic.parse(date.to_s + ", " + time.to_s)
-
-    #   show = Show.new
-    #   show.source = shows_url.to_s
-    #   show.time_is_uncertain = false
-
-    #   show.doors_at = doors_at
-    #   show.starts_at = doors_at.localtime
-    #   show.venue_id = haileys.id
-    #   show.save
-
-    #   position = 0
-    #   bands.each do | band |
-    #     band_name = Nokogiri::HTML( band.to_s ).text
-
-    #     puts band_name
-
-    #     cleansed_band_name = band_name.downcase
-
-    #     position += 1
-    #     full_name = cleansed_band_name.split(' ').collect{ | x | x.capitalize}
-    #     full_name = full_name.join( " " )
-
-    #     artist = Artist.find_or_create_by name: full_name
-    #     artist.save
-
-    #     gig = Gig.new
-    #     gig.artist_id = artist.id
-    #     gig.show_id = show.id
-    #     gig.position = position
-    #     gig.save
-    #     show.gigs << gig
-    #   end
-    #   show.save
-
-    #   puts show
-    # end
-
-
   end
 end
