@@ -44,7 +44,6 @@ class Haileys < Scraper
       price && price.include?("$")
     end
 
-    puts prices
     price = prices[0] ? prices[0] : "???"
     {
       price: price

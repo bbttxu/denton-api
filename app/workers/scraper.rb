@@ -6,15 +6,23 @@ require 'cachebar'
 
 
 class String
-	def slugify
-		self.strip.gsub(/(.*)(p|P)resents(:?)/, '').downcase.gsub(/\s/,'-').gsub(/[!]/, '').gsub('.','')
-	end
+  def slug
+    self.strip.gsub(/(.*)(p|P)resents(:?)/, '').downcase.gsub(/\s/,'-').gsub(/[!]/, '').gsub('.','').gsub("&","and")
+  end
 
-	def deslugify
-		self.split('-').collect{ | x | x.capitalize}.join(" ")
-	end
+  def slugify
+    self.strip.gsub(/(.*)(p|P)resents(:?)/, '').downcase.gsub(/\s/,'-').gsub(/[!]/, '').gsub('.','')
+  end
+
+  def deslugify
+    self.split('-').collect{ | x | x.capitalize}.join(" ")
+  end
 end
 
 class Scraper
   include Resque::Plugins::UniqueJob
+
+  def slugify(text)
+    text.slug
+  end
 end
