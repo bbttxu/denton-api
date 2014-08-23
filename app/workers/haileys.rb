@@ -67,16 +67,11 @@ class Haileys < Scraper
     haileys.save
 
 
-    html = Nokogiri::HTML( open( 'http://haileysclub.com/contact/' ) )
-    # shows = Show.destroy_all :venue_id => haileys.id
-
+    # html = Nokogiri::HTML( open( 'http://haileysclub.com/contact/' ) )
 
     current_shows_id = Show.where(:venue => haileys).collect{|x|puts x.id}
-    puts "current"
-    puts current_shows_id
 
     new_show_ids = []
-    puts "new"
 
     shows().each do |showHTML|
       show = {}
@@ -88,6 +83,8 @@ class Haileys < Scraper
       show.venue = haileys
       show.save
 
+      gig_ids = show.gigs
+
       new_show_ids << show.id
 
       # puts show.to_json
@@ -98,31 +95,17 @@ class Haileys < Scraper
       full_name = full_name.join( " " )
 
       artist = Artist.find_or_initialize_by name: full_name
-
-      # artist = Artist.new artist
       artist.save
 
-      # puts artist.to_json
-
       gig = Gig.find_or_initialize_by :position => 1, :artist_id => artist.id, :show_id => show.id
-
-      # gig.position = 1
-      # gig.artist = artist
-      # gig.show = show
       gig.save
 
-      # puts gig
 
       show.gigs << gig
 
       show.save
-
-      puts show.to_json
     end
 
-
-    puts "diff"
-    puts (current_shows_id - new_show_ids)
     (current_shows_id - new_show_ids).each do |show_id|
       Show.find(show_id).destroy
     end
