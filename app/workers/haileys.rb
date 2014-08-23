@@ -8,6 +8,10 @@ require 'chronic'
 class Haileys < Scraper
   @queue = :haileys
 
+  def self.site
+    open( "http://smokingmouse.com/haileys/" )
+  end
+
   def self.perform()
     puts "updating Hailey's"
 
