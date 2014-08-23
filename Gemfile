@@ -48,6 +48,8 @@ end
 
 group :test do
   gem 'database_cleaner'
+  gem 'webmock'
+  gem 'vcr'
 end
 
 gem 'newrelic_rpm'
