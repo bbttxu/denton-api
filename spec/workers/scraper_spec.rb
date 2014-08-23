@@ -13,4 +13,17 @@ describe Scraper do
       @scraper.slugify("Floating & Action").should == "floating-and-action"
     end
   end
+  describe "slugify" do
+    it "slugifies an name" do
+      "Floating Action".slugify.should == "floating-action"
+      "Floating & Action".slugify.should == "floating-&-action"
+    end
+  end
+
+  describe "deslugify" do
+    it "deslugifies an name" do
+      "floating-action".deslugify.should == "Floating Action"
+      "floating-&-action".deslugify.should == "Floating & Action"
+    end
+  end
 end
