@@ -5,6 +5,7 @@ class Venue
   include Geocoder::Model::Mongoid
 
   field :name, :type => String
+  field :slug, :type => String
   field :phone, :type => String
   field :address, :type => String
   field :coordinates, :type => Array
