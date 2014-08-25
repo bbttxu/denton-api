@@ -12,7 +12,7 @@ describe Artist do
   end
 
   it "should have a slug" do
-    artist = FactoryGirl.build 'slug', name: ''
+    artist = FactoryGirl.build 'artist', slug: ''
     artist.should_not be_valid
   end
 

@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe ShowsController, :type => :controller do
+describe ArtistsController, :type => :controller do
   describe "an index" do
     it "should return JSON" do
       request.accept = "application/json"
@@ -22,7 +22,7 @@ describe ShowsController, :type => :controller do
 
     it "should return that days JSON" do
       request.accept = "application/json"
-      get :day, id: "artist_name"
+      get :show, id: "artist_name"
       response.should be_success
     end
 
