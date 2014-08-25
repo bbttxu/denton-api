@@ -33,7 +33,6 @@ VCR.use_cassette 'venue/geocode' do
       venue.should_not be_valid
     end
 
-
     it "should have a location" do
       venue = FactoryGirl.build 'venue', address: "Denton, TX"
       venue.save
