@@ -17,4 +17,5 @@ class Venue
 
   after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
   geocoded_by :address
+
 end

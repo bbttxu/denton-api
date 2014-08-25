@@ -11,6 +11,7 @@ class Andys < Scraper
     #puts "updating andys"
 
     andys = Venue.find_or_create_by name: "Andys"
+    andys.slug = "andys"
     andys.phone = "122 N Locust, Denton, TX"
     andys.address = "122 N Locust, Denton, TX"
     andys.save

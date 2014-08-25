@@ -11,13 +11,15 @@ class VenuesController < ApplicationController
 
     @venues = Venue.near( [latitude,longitude], radius )
 
+    @venues = Venue.all
+
     render json: @venues
   end
 
   # GET /venues/1
   # GET /venues/1.json
   def show
-    @venue = Venue.find(params[:id])
+    @venue = Venue.where({slug: params[:id]})
 
     render json: @venue
   end

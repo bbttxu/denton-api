@@ -12,6 +12,7 @@ class Banter < Scraper
     puts "updating banter"
 
     banter = Venue.find_or_create_by name: "Banter"
+    banter.slug = "banter_cafe"
     banter.phone = "(940) 565-1638"
     banter.address = "219 W Oak, Denton, TX 76201-4223"
     banter.save

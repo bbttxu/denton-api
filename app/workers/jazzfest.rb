@@ -13,7 +13,7 @@ class JazzFest < Scraper
 
   	stages = [
 			{
-				name: "Jazz Stage", 
+				name: "Jazz Stage",
 				url: "jazzStage"
 			},
       {
@@ -41,7 +41,7 @@ class JazzFest < Scraper
         url: "centerStage"
       }
   	]
- 
+
 
  		stages.each_with_index do |stage, index|
  			puts stage
@@ -64,7 +64,7 @@ class JazzFest < Scraper
 
 	    dates = html.css('.sbrMid .sbrLCol .content .unify').each do |h6|
 	    	date = h6.text
-	    
+
 	    	h6.next_element.css('.stageListing').each do |listing|
 	    		time = listing.css('.stageTime').text
 
@@ -92,7 +92,7 @@ class JazzFest < Scraper
           gig.show_id = show.id
           gig.position = 1
           gig.save
-          
+
 	    	end
 	    end
  		end

@@ -10,6 +10,7 @@ class Rgrs < Scraper
 
   def self.perform
     rgrs = Venue.find_or_create_by name: "Rubber Gloves"
+    rgrs.slug = "rubber_gloves"
     rgrs.phone = "(940) 387-7781"
     rgrs.address = "411 East Sycamore, Denton, TX 76205"
     rgrs.save
