@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ShowsController, :type => :controller do
+describe ArtistsController, :type => :controller do
   describe "an index" do
     it "should return JSON" do
       request.accept = "application/json"
