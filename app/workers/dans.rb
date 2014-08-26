@@ -14,6 +14,7 @@ class Dans < Scraper
     puts "updating Dans"
 
     dans = Venue.find_or_create_by name: "Dan's Silverleaf"
+    dans.slug = "dans_silverleaf"
     dans.phone = "9403202000"
     dans.address = "103 Industrial Street, Denton, TX 76201-4223"
     dans.save

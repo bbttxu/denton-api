@@ -11,6 +11,7 @@ class Abbey < Scraper
     puts "updating Abbey Underground"
 
     abbey = Venue.find_or_create_by name: "Abbey Underground"
+    abbey.slug = "abbey_underground"
     abbey.phone = "(940) 566-5483"
     abbey.address = "101 W Hickory St  Denton, TX 76201"
     abbey.save

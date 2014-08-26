@@ -11,6 +11,7 @@ class Rockinrodeo < Scraper
 
   def self.perform
     rockinrodeo = Venue.find_or_create_by_name "Rockinrodeo"
+    rgrs.slug = "rockinrodeo"
     rockinrodeo.phone = "xxx-xxx-xxxx"
     rockinrodeo.address = "1009 Avenue C"
     rockinrodeo.save

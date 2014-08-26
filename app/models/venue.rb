@@ -5,15 +5,17 @@ class Venue
   include Geocoder::Model::Mongoid
 
   field :name, :type => String
+  field :slug, :type => String
   field :phone, :type => String
   field :address, :type => String
   field :coordinates, :type => Array
 
-  validates_presence_of :name, :phone, :address
-  validates_uniqueness_of :name, :phone, :address
+  validates_presence_of :name, :phone, :address, :slug
+  validates_uniqueness_of :name, :phone, :address, :slug
 
   has_many :shows
 
   after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
   geocoded_by :address
+
 end

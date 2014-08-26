@@ -62,6 +62,7 @@ class Haileys < Scraper
     puts "updating Hailey's"
 
     haileys = Venue.find_or_create_by name: "Hailey's Club"
+    haileys.slug = "haileys_club"
     haileys.phone = "(940) 323-1159"
     haileys.address = "122 Mulberry Street, Denton, TX"
     haileys.save
