@@ -13,7 +13,7 @@ class VenuesController < ApplicationController
 
     @venues = Venue.all
 
-    render json: @venues
+    render json: @venues, except: [:shows]
   end
 
   # GET /venues/1
