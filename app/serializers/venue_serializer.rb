@@ -1,6 +1,6 @@
 # venue_serializer.rb
 class VenueSerializer < ActiveModel::Serializer
-  attributes :name, :coordinates, :slug => :id
+  attributes :name, :coordinates, :id
 
   # has_many :shows, serializer: ShowSerializer, include: true, embed: :ids, key: :shows
 
