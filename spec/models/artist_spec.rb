@@ -13,7 +13,7 @@ describe Artist do
 
   it "should have a slug" do
     artist = FactoryGirl.build 'artist', slug: ''
-    artist.should_not be_valid
+    artist.should be_valid
   end
 
   it "should have a unique name" do
