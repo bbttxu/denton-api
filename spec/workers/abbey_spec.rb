@@ -25,10 +25,10 @@ VCR.use_cassette 'abbey/http_request' do
         source.length.should_not == 0
       end
 
-      it "parses the price" do
-        price = Abbey.parsePrice @shows[0]
-        price.length.should_not == 0
-      end
+      # it "parses the price" do
+      #   price = Abbey.parsePrice @shows[0]
+      #   price.length.should_not == 0
+      # end
     end
   end
 end
