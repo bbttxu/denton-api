@@ -7,6 +7,13 @@ require 'chronic'
 # worker to scrape data from the following venue
 class Abbey < Scraper
   @queue = :abbey
+
+  @shows_url = "http://www.reverbnation.com/venue/1003284"
+
+  def self.site
+    open( @shows_url )
+  end
+
   def self.perform()
     puts "updating Abbey Underground"
 
