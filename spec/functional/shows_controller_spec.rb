@@ -6,6 +6,7 @@ describe ShowsController, :type => :controller do
       request.accept = "application/json"
       get :index
       response.should be_success
+      response.header['Content-Type'].should include 'application/json'
     end
 
     it "should respond properly to a JSONP callback"
@@ -16,6 +17,7 @@ describe ShowsController, :type => :controller do
       request.accept = "application/json"
       get :calendar
       response.should be_success
+      response.header['Content-Type'].should include 'application/json'
     end
 
     it "should respond properly to a JSONP callback"
@@ -27,6 +29,7 @@ describe ShowsController, :type => :controller do
       request.accept = "application/json"
       get :day, date: "2014-12-14"
       response.should be_success
+      response.header['Content-Type'].should include 'application/json'
     end
 
     it "should respond properly to a JSONP callback"
