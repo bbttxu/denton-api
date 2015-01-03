@@ -39,5 +39,8 @@ module DentonApi
 
     config.i18n.enforce_available_locales = true
 
+    # FIXME https://github.com/jamesotron/faye-rails/issues/41
+    config.middleware.delete Rack::Lock
+
   end
 end
