@@ -8,6 +8,19 @@ require 'chronic'
 
 class Banter < Scraper
   @queue = :banter
+
+  @shows_url = "https://www.google.com/calendar/ical/dentonbanter%40gmail.com/public/basic.ics"
+
+  def self.site
+    open( @shows_url )
+  end
+
+
+  def self.shows
+    Icalendar.parse(site())
+  end
+
+
   def self.perform()
     puts "updating banter"
 
@@ -19,24 +32,27 @@ class Banter < Scraper
     shows = Show.delete_all :venue_id => banter.id
 
 
+    # url = "https://www.google.com/calendar/ical/dentonbanter%40gmail.com/public/basic.ics"
+    # response = HTTParty.get(url).response
+    # # puts response
+    # cals = Icalendar.parse(response.body)
 
-
-    url = "https://www.google.com/calendar/ical/dentonbanter%40gmail.com/public/basic.ics"
-    response = HTTParty.get(url).response
-    puts response
-  	cals = Icalendar.parse(response.body)
-
-  	cals.each do |cal|
-  		cal.events.each do |event|
+    shows().each do |cal|
+      cal.events.each do |event|
         # date = DateTime.parse(event.dtstart)
         if event.dtstart.future?
-          show = Show.new
-          show.starts_at = event.dtstart
-          show.doors_at = event.dtstart
-          show.source = url
-          show.venue_id = banter.id
-          show.time_is_uncertain = false
-          show.price = "?"
+
+          show = {}
+          show['starts_at'] = event.dtstart
+          show['doors_at'] = event.dtstart
+          show['source'] = @shows_url
+          show['time_is_uncertain'] = false
+          show['price'] = "?"
+
+          show = Show.find_or_initialize_by show
+
+          show.venue = banter
+
           show.save
 
           position = 1
@@ -48,7 +64,7 @@ class Banter < Scraper
             band_key = band_name.strip.downcase.gsub(/\s/,'-').gsub(/[!]/, '').gsub('.','')
             # # puts full_name
             artist = Artist.find_or_create_by name: full_name
-            puts artist.name
+            # puts artist.name
             artist.save
 
             gig = Gig.new
@@ -57,18 +73,18 @@ class Banter < Scraper
             gig.position = position
             gig.save
 
-            puts gig
+            # puts gig
             show.gigs << gig
 
             position += 1
 
           end
 
-  				# puts "start date-time: #{event.dtstart}"
-  				# puts "start date-time timezone: #{event.dtstart.icalendar_tzid}" if event.dtstart.is_a?(DateTime)
-  				# puts "summary: #{event.summary}"
+          # puts "start date-time: #{event.dtstart}"
+          # puts "start date-time timezone: #{event.dtstart.icalendar_tzid}" if event.dtstart.is_a?(DateTime)
+          # puts "summary: #{event.summary}"
         end
-  		end
-  	end
+      end
+    end
   end
 end
