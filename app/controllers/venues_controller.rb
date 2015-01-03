@@ -13,7 +13,7 @@ class VenuesController < ApplicationController
 
     @venues = Venue.all
 
-    render json: @venues, except: [:shows]
+    render json: @venues, except: [:shows], callback: params[:callback]
   end
 
   # GET /venues/1
@@ -21,7 +21,7 @@ class VenuesController < ApplicationController
   def show
     @venue = Venue.where({slug: params[:id]})
 
-    render json: @venue
+    render json: @venue, callback: params[:callback]
   end
 
   # # POST /venues
