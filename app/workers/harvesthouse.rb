@@ -20,29 +20,36 @@ class HarvestHouse < Scraper
   end
 
   def self.parseSource(show)
-    puts "parse source"
     meta = show.css('h1 a')
-    # puts meta
 
-    # source = ''
-
-    # if meta['href']
-    #   source = [ "http://www.dentonharvesthouse.com", meta['href'] ].join("")
-    # end
-
+    source = nil
+    if meta[0]
+      source = [ "http://www.dentonharvesthouse.com", meta[0]['href'].to_s ].join("")
+    end
     {
-      source: meta['href']
+      source: source
     }
   end
 
   def self.parseStartsAt(show)
-    starts_at =  show.css('.details_time').text
-    asdf = starts_at.gsub(",","").gsub(/\s/, " ").split(" ")
-    event = "#{asdf[1]} #{asdf[2]} #{asdf[5]}"
+    event = ''
+    starts_at = show.css('div')
 
+
+    if starts_at[1]
+      starts_at = starts_at[1].text.strip!
+      tokens = starts_at.split ", "
+
+      time = tokens.pop
+      time = time.split('–')[0]
+
+      if time
+        event = "#{tokens[1]} #{tokens[2]} #{time}"
+      end
+    end
     {
       starts_at: Chronic.parse(event),
-      time_is_uncertain: false
+      time_is_uncertain: true
     }
   end
 
@@ -50,15 +57,31 @@ class HarvestHouse < Scraper
 
   end
 
-  def self.parseArtist(show)
-    band_name = show.css('h4.show_artist').text.strip
-    cleansed_band_name = band_name.downcase
-    full_name = cleansed_band_name.split(' ').collect{ | x | x.capitalize}
-    full_name = full_name.join( " " )
-    {
-      name: full_name
-    }
-  end
+  # def self.parseArtists(show)
+  #   lineup = show.css('h1 a')
+  #   g = []
+
+  #   if lineup[0]
+  #     puts "hi"
+  #     puts lineup[0]
+  #     # bands = lineup.split " "
+  #     # puts bands
+  #   end
+
+
+
+
+
+  #   # band_name = show.css('h4.show_artist').text.strip
+  #   # cleansed_band_name = band_name.downcase
+  #   # full_name = cleansed_band_name.split(' ').collect{ | x | x.capitalize}
+  #   # full_name = full_name.join( " " )
+  #   # g = {
+  #   #   name: full_name
+  #   # }
+  #   # puts g
+  #   g
+  # end
 
   def self.perform()
     puts "updating harvesthouse"
@@ -75,7 +98,7 @@ class HarvestHouse < Scraper
 
 
     shows().each do |showHTML|
-      puts "hi!"
+      # puts "hi!"
       # puts showHTML
 
 
