@@ -57,38 +57,29 @@ class HarvestHouse < Scraper
 
   end
 
-  # def self.parseArtists(show)
-  #   lineup = show.css('h1 a')
-  #   g = []
+  def self.parseArtists(show)
+    lineup = show.css('h1 a')
+    g = []
 
-  #   if lineup[0]
-  #     puts "hi"
-  #     puts lineup[0]
-  #     # bands = lineup.split " "
-  #     # puts bands
-  #   end
+    if lineup[0]
+      bands = lineup[0].text.split "//"
 
-
-
-
-
-  #   # band_name = show.css('h4.show_artist').text.strip
-  #   # cleansed_band_name = band_name.downcase
-  #   # full_name = cleansed_band_name.split(' ').collect{ | x | x.capitalize}
-  #   # full_name = full_name.join( " " )
-  #   # g = {
-  #   #   name: full_name
-  #   # }
-  #   # puts g
-  #   g
-  # end
+      g = bands.collect { |band|
+        cleansed_band_name = band.downcase
+        full_name = cleansed_band_name.split(' ').collect{ | x | x.capitalize}
+        full_name = full_name.join( " " )
+        { name: full_name }
+      }
+    end
+    g
+  end
 
   def self.perform()
     puts "updating harvesthouse"
 
     harvesthouse = Venue.find_or_create_by name: "Harvest House"
     harvesthouse.slug = "harvesthouse"
-    harvesthouse.phone = ""
+    harvesthouse.phone = "331 E Hickory St, Denton, TX"
     harvesthouse.address = "331 E Hickory St, Denton, TX"
     harvesthouse.save
 
@@ -98,8 +89,6 @@ class HarvestHouse < Scraper
 
 
     shows().each do |showHTML|
-      # puts "hi!"
-      # puts showHTML
 
 
       show = {}
@@ -112,29 +101,27 @@ class HarvestHouse < Scraper
 
       show.save
 
-      puts show.to_json
+      gig_ids = show.gigs
 
-      # gig_ids = show.gigs
+      new_show_ids << show.id
 
-      # new_show_ids << show.id
+      artists = parseArtists(showHTML)
 
-      # artist = parseArtist(showHTML)
+      artists.each_with_index { |artist, index|
 
-      # artist = Artist.find_or_initialize_by artist
+        artist = Artist.find_or_initialize_by artist
 
-      # puts artist.errors.to_json
+        artist.save
 
-      # artist.save
+        gig = Gig.find_or_initialize_by :position => index, :artist => artist, :show_id => show.id
+        gig.save
 
-      # gig = Gig.find_or_initialize_by :position => 1, :artist => artist, :show_id => show.id
+        show.gigs << gig
 
-      # puts gig.to_json
 
-      # gig.save
+      }
 
-      # show.gigs << gig
-
-      # show.save
+      show.save
     end
 
     (current_shows_id - new_show_ids).each do |show_id|
