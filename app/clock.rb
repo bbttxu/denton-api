@@ -7,8 +7,9 @@ require File.expand_path('../workers/dans.rb',  __FILE__)
 require File.expand_path('../workers/haileys.rb',  __FILE__)
 require File.expand_path('../workers/rubbergloves.rb',  __FILE__)
 require File.expand_path('../workers/andys.rb',  __FILE__)
-require File.expand_path('../workers/rockinrodeo.rb',  __FILE__)
+# require File.expand_path('../workers/rockinrodeo.rb',  __FILE__)
 require File.expand_path('../workers/abbey.rb',  __FILE__)
+require File.expand_path('../workers/harvesthouse.rb',  __FILE__)
 # require File.expand_path('../workers/jazzfest.rb',  __FILE__)
 # require File.expand_path('../workers/untcalendar.rb',  __FILE__)
 
@@ -24,6 +25,7 @@ every( 15.minutes, 'update.venues') {
   Resque.enqueue(Andys)
   # Resque.enqueue(Rockinrodeo)
   Resque.enqueue(Abbey)
+  Resque.enqueue(HarvestHouse)
   # Resque.enqueue(JazzFest)
   # Resque.enqueue(UNTCalendar)
 }
