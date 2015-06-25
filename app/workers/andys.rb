@@ -8,7 +8,7 @@ require 'chronic'
 class Andys < Scraper
   @queue = :andys
 
-  @shows_url = "http://www.reverbnation.com/venue/andysbar"
+  @shows_url = "https://www.reverbnation.com/venue/andysbar"
 
   def self.site
     open( @shows_url )
@@ -94,7 +94,13 @@ class Andys < Scraper
 
       artist.save
 
-      gig = Gig.find_or_initialize_by :position => 1, :artist => artist, :show_id => show.id
+      query = {
+        :position => 1,
+        :artist => artist,
+        :show_id => show.id
+      }
+
+      gig = Gig.find_or_initialize_by query
 
       puts gig.to_json
 
