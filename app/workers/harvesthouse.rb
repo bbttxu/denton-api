@@ -39,23 +39,6 @@ class HarvestHouse < Scraper
 
     date = show.css('.event-date').attr('datetime')
 
-    # puts time
-    # puts date
-    # puts [date, time].join(" ")
-    # puts Chronic.parse([date, time].join(" "))
-
-
-    # if starts_at[1]
-    #   starts_at = starts_at[1].text.strip!
-    #   tokens = starts_at.split ", "
-
-    #   time = tokens.pop
-    #   time = time.split('–')[0]
-
-    #   if time
-    #     event = "#{tokens[1]} #{tokens[2]} #{time}"
-    #   end
-    # end
     {
       starts_at: Chronic.parse([date, time].join(" ")),
       time_is_uncertain: false
@@ -92,13 +75,12 @@ class HarvestHouse < Scraper
     harvesthouse.address = "331 E Hickory St, Denton, TX"
     harvesthouse.save
 
-    current_shows_id = Show.where(:venue => harvesthouse).collect{|x|puts x.id}
+    current_shows_id = Show.where(:venue => harvesthouse).collect{|x|x.id}
 
     new_show_ids = []
 
 
     shows().each do |showHTML|
-      # puts showHTML
 
       show = {}
       show = show.merge parseSource(showHTML)
@@ -126,10 +108,6 @@ class HarvestHouse < Scraper
         gig.save
 
         show.gigs << gig
-
-        puts show.to_json
-        puts show.errors.to_json
-
       }
 
       show.save
