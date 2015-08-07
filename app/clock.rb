@@ -17,7 +17,7 @@ require 'clockwork'
 include Clockwork
 require 'resque'
 
-every( 1.minutes, 'update.venues') {
+every( 5.seconds, 'update.venues') {
   puts 'update venues'
   Resque.enqueue(Dans)
   Resque.enqueue(Haileys)

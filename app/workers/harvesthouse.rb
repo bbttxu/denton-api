@@ -16,7 +16,7 @@ class HarvestHouse < Scraper
 
   def self.shows
     doc = Nokogiri::HTML(site())
-    doc.css("#content noscript ul li")
+    doc.css(".eventlist-event--upcoming")
   end
 
   def self.parseSource(show)
@@ -33,23 +33,32 @@ class HarvestHouse < Scraper
 
   def self.parseStartsAt(show)
     event = ''
-    starts_at = show.css('div')
+    starts_at = show.css('.event-time-12hr-start')
+
+    time = starts_at.text
+
+    date = show.css('.event-date').attr('datetime')
+
+    # puts time
+    # puts date
+    # puts [date, time].join(" ")
+    # puts Chronic.parse([date, time].join(" "))
 
 
-    if starts_at[1]
-      starts_at = starts_at[1].text.strip!
-      tokens = starts_at.split ", "
+    # if starts_at[1]
+    #   starts_at = starts_at[1].text.strip!
+    #   tokens = starts_at.split ", "
 
-      time = tokens.pop
-      time = time.split('–')[0]
+    #   time = tokens.pop
+    #   time = time.split('–')[0]
 
-      if time
-        event = "#{tokens[1]} #{tokens[2]} #{time}"
-      end
-    end
+    #   if time
+    #     event = "#{tokens[1]} #{tokens[2]} #{time}"
+    #   end
+    # end
     {
-      starts_at: Chronic.parse(event),
-      time_is_uncertain: true
+      starts_at: Chronic.parse([date, time].join(" ")),
+      time_is_uncertain: false
     }
   end
 
@@ -89,7 +98,7 @@ class HarvestHouse < Scraper
 
 
     shows().each do |showHTML|
-
+      # puts showHTML
 
       show = {}
       show = show.merge parseSource(showHTML)
@@ -118,6 +127,8 @@ class HarvestHouse < Scraper
 
         show.gigs << gig
 
+        puts show.to_json
+        puts show.errors.to_json
 
       }
 
