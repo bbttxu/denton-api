@@ -40,7 +40,7 @@ class HarvestHouse < Scraper
     date = show.css('.event-date').attr('datetime')
 
     {
-      starts_at: Chronic.parse([date, time].join(" ")),
+      starts_at: Chronic.parse([date, time].join(" ")).localtime,
       time_is_uncertain: false
     }
   end
