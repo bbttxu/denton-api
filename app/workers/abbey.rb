@@ -8,7 +8,7 @@ require 'chronic'
 class Abbey < Scraper
   @queue = :abbey
 
-  @shows_url = "http://www.reverbnation.com/venue/1003284"
+  @shows_url = "https://www.reverbnation.com/venue/1003284"
 
   def self.site
     open( @shows_url )
