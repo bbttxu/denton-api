@@ -16,7 +16,7 @@ class HarvestHouse < Scraper
 
   def self.shows
     doc = Nokogiri::HTML(site())
-    doc.css("#content noscript ul li")
+    doc.css(".eventlist-event--upcoming")
   end
 
   def self.parseSource(show)
@@ -33,23 +33,15 @@ class HarvestHouse < Scraper
 
   def self.parseStartsAt(show)
     event = ''
-    starts_at = show.css('div')
+    starts_at = show.css('.event-time-12hr-start')
 
+    time = starts_at.text
 
-    if starts_at[1]
-      starts_at = starts_at[1].text.strip!
-      tokens = starts_at.split ", "
+    date = show.css('.event-date').attr('datetime')
 
-      time = tokens.pop
-      time = time.split('–')[0]
-
-      if time
-        event = "#{tokens[1]} #{tokens[2]} #{time}"
-      end
-    end
     {
-      starts_at: Chronic.parse(event),
-      time_is_uncertain: true
+      starts_at: Chronic.parse([date, time].join(" ")).localtime,
+      time_is_uncertain: false
     }
   end
 
@@ -83,13 +75,12 @@ class HarvestHouse < Scraper
     harvesthouse.address = "331 E Hickory St, Denton, TX"
     harvesthouse.save
 
-    current_shows_id = Show.where(:venue => harvesthouse).collect{|x|puts x.id}
+    current_shows_id = Show.where(:venue => harvesthouse).collect{|x|x.id}
 
     new_show_ids = []
 
 
     shows().each do |showHTML|
-
 
       show = {}
       show = show.merge parseSource(showHTML)
@@ -117,8 +108,6 @@ class HarvestHouse < Scraper
         gig.save
 
         show.gigs << gig
-
-
       }
 
       show.save
